@@ -764,14 +764,6 @@
     }
     .ig-handle:hover { color: var(--teal-l); }
 
-    /* 5-post layout: 3 top, 2 bottom */
-    .ig-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto;
-      gap: 4px;
-    }
-
     .ig-post {
       position: relative;
       overflow: hidden;
@@ -780,10 +772,6 @@
       display: block;
       text-decoration: none;
     }
-
-    /* 4th and 5th posts span their own columns within bottom row */
-    .ig-post:nth-child(4) { grid-column: 1 / 2; }
-    .ig-post:nth-child(5) { grid-column: 2 / 3; }
 
     .ig-post img {
       width: 100%;
@@ -820,16 +808,6 @@
       color: var(--cream);
     }
 
-    /* Bottom 2 posts centered */
-    .ig-bottom {
-      grid-column: 1 / 4;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-    }
-
-    .ig-bottom .ig-post:first-child { grid-column: 1 / 2; }
-    .ig-bottom .ig-post:last-child  { grid-column: 2 / 3; }
 
     .ig-follow {
       text-align: center;
