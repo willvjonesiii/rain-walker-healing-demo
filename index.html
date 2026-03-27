@@ -502,6 +502,17 @@
       position: relative;
     }
 
+    .about-photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(0.92) saturate(0.88);
+    }
+
     .about-photo::before {
       content: '';
       position: absolute;
@@ -512,17 +523,6 @@
       border: 1px solid rgba(48, 175, 163, 0.25);
       pointer-events: none;
       z-index: 0;
-    }
-
-    .about-photo img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      filter: brightness(0.92) saturate(0.88);
     }
 
     .about-h2 {
@@ -1502,61 +1502,31 @@
         </a>
       </div>
 
-      <!-- 5-post grid: 3 top, 2 bottom centered -->
-      <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:4px;">
+      <!-- 5-post single row -->
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:4px;">
 
-        <!-- Post 1 — Two women selfie (boat) -->
-        <a class="ig-post rv" href="https://www.instagram.com/rainwalkerhealing/" target="_blank"
-           style="grid-column:span 2;" aria-label="Instagram post">
-          <img
-            src="ig-1.jpg"
-            onerror="this.src='https://img1.wsimg.com/isteam/ip/6401b4c5-215b-4f3d-9971-17d1411f136e/4C96BC36-F659-4D67-8522-E67789258A3F.jpeg/:/cr=t:7.97%25,l:9.29%25,w:87.29%25,h:65.47%25/rs=w:800,h:800,cg:true,m'"
-            alt="Nikki Zalesak with a client"
-          >
+        <a class="ig-post rv" href="https://www.instagram.com/rainwalkerhealing/" target="_blank" aria-label="Instagram post">
+          <img src="IG%20Images/1.png" alt="Nikki Zalesak with a client">
           <div class="ig-overlay"><span class="ig-overlay-label">Rain Walker Healing</span></div>
         </a>
 
-        <!-- Post 2 — Nikki in session video -->
-        <a class="ig-post rv d1" href="https://www.instagram.com/rainwalkerhealing/" target="_blank"
-           style="grid-column:span 2;" aria-label="Instagram post">
-          <img
-            src="ig-2.jpg"
-            onerror="this.src='https://img1.wsimg.com/isteam/ip/6401b4c5-215b-4f3d-9971-17d1411f136e/office.jpg'"
-            alt="Nikki Zalesak in her healing practice"
-          >
+        <a class="ig-post rv d1" href="https://www.instagram.com/rainwalkerhealing/" target="_blank" aria-label="Instagram post">
+          <img src="IG%20Images/2.png" alt="Nikki Zalesak in her healing practice">
           <div class="ig-overlay"><span class="ig-overlay-label">Rain Walker Healing</span></div>
         </a>
 
-        <!-- Post 3 — Nikki smiling white sweater -->
-        <a class="ig-post rv d2" href="https://www.instagram.com/rainwalkerhealing/" target="_blank"
-           style="grid-column:span 2;" aria-label="Instagram post">
-          <img
-            src="ig-3.jpg"
-            onerror="this.src='https://img1.wsimg.com/isteam/ip/6401b4c5-215b-4f3d-9971-17d1411f136e/PXL_20260210_211635912.PORTRAIT.jpg'"
-            alt="Nikki Zalesak"
-          >
+        <a class="ig-post rv d2" href="https://www.instagram.com/rainwalkerhealing/" target="_blank" aria-label="Instagram post">
+          <img src="IG%20Images/3.png" alt="Nikki Zalesak">
           <div class="ig-overlay"><span class="ig-overlay-label">Rain Walker Healing</span></div>
         </a>
 
-        <!-- Post 4 — Group fire ceremony (centered in row 2) -->
-        <a class="ig-post rv d1" href="https://www.instagram.com/rainwalkerhealing/" target="_blank"
-           style="grid-column:2/4;" aria-label="Instagram post">
-          <img
-            src="ig-4.jpg"
-            onerror="this.src='https://img1.wsimg.com/isteam/ip/6401b4c5-215b-4f3d-9971-17d1411f136e/crystal-bowls.jpg'"
-            alt="Sacred fire ceremony"
-          >
+        <a class="ig-post rv d3" href="https://www.instagram.com/rainwalkerhealing/" target="_blank" aria-label="Instagram post">
+          <img src="IG%20Images/4.png" alt="Sacred fire ceremony">
           <div class="ig-overlay"><span class="ig-overlay-label">Rain Walker Healing</span></div>
         </a>
 
-        <!-- Post 5 — Reiki training graphic -->
-        <a class="ig-post rv d2" href="https://www.instagram.com/rainwalkerhealing/" target="_blank"
-           style="grid-column:4/6;" aria-label="Instagram post">
-          <img
-            src="ig-5.jpg"
-            onerror="this.src='https://img1.wsimg.com/isteam/ip/6401b4c5-215b-4f3d-9971-17d1411f136e/reiki-hands-rain.png'"
-            alt="Reiki I & II Training"
-          >
+        <a class="ig-post rv d4" href="https://www.instagram.com/rainwalkerhealing/" target="_blank" aria-label="Instagram post">
+          <img src="IG%20Images/5.png" alt="Reiki I &amp; II Training">
           <div class="ig-overlay"><span class="ig-overlay-label">Reiki I &amp; II Training</span></div>
         </a>
 
