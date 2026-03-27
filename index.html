@@ -430,104 +430,62 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 5rem);
+      padding: clamp(2rem, 3.5vw, 3.5rem) clamp(1.5rem, 6vw, 5rem);
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    /* VARIED TYPOGRAPHY STACK */
-    .pb-eyebrow {
-      font-size: 0.66rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(184, 216, 224, 0.5);
-      margin-bottom: 1.25rem;
-      display: block;
-    }
+    /*
+      3 sizes. Color + italic only for variation. No uppercase. No letter-spacing shifts.
 
-    .pb-huge {
-      display: block;
+      T1 — clamp(3rem, 6vw, 5rem)      serif · display moments
+      T2 — clamp(1.5rem, 3vw, 2.5rem)  serif · secondary display
+      T3 — 1rem                         serif · all body / labels
+    */
+
+    /* shared base for all parallax text */
+    .parallax-content span,
+    .parallax-content p {
       font-family: var(--serif);
-      font-size: clamp(5.5rem, 15vw, 13rem);
-      font-style: italic;
       font-weight: 300;
-      color: var(--teal-l);
-      line-height: 0.88;
-      letter-spacing: -0.01em;
+      display: block;
     }
 
-    .pb-large {
-      display: block;
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 0.95;
+    /* T1 — display */
+    .pb-t1 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1;
     }
 
-    .pb-and-spirit {
-      display: block;
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4.5vw, 4rem);
-      font-style: italic;
-      font-weight: 300;
-      color: var(--pale);
-      line-height: 1.1;
-      margin-top: 0.4rem;
+    /* T2 — sub-display */
+    .pb-t2 {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      line-height: 1.15;
     }
 
-    .pb-wellness {
-      display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 2rem 0 3rem;
+    /* T3 — body / labels */
+    .pb-t3 {
+      font-size: 1rem;
+      line-height: 1.7;
     }
+
+    /* color modifiers */
+    .pb-teal   { color: var(--teal-l); }
+    .pb-cream  { color: var(--cream); }
+    .pb-pale   { color: var(--pale); }
+
+    /* spacing helpers */
+    .pb-mt-sm  { margin-top: 0.3rem; }
+    .pb-mt-md  { margin-top: 1rem; }
+    .pb-mt-lg  { margin-top: 1.4rem; }
+    .pb-mb-md  { margin-bottom: 1rem; }
 
     .pb-divider {
-      width: 60px;
+      width: 40px;
       height: 1px;
-      background: rgba(48, 175, 163, 0.4);
-      margin: 0 auto 3rem;
-    }
-
-    .pb-offering {
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      color: var(--pale);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .pb-bring {
-      display: block;
-      font-size: 0.66rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(184,216,224,0.5);
-      margin: 1.5rem 0 0.6rem;
-    }
-
-    .pb-clarity {
-      display: block;
-      font-family: var(--serif);
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-style: italic;
-      font-weight: 300;
-      color: var(--teal-l);
-      line-height: 1;
-      margin-bottom: 3.5rem;
-    }
-
-    .pb-second {
-      font-size: clamp(0.88rem, 1.4vw, 1.05rem);
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 58ch;
-      margin: 0 auto;
-      font-style: italic;
-      font-family: var(--serif);
+      background: rgba(48, 175, 163, 0.45);
+      margin: 1rem auto;
     }
 
     /* ─── MEET NIKKI ───────────────────────────────── */
@@ -1278,27 +1236,27 @@
 
     <div class="parallax-content">
 
-      <span class="pb-eyebrow rv">Rain Walker Healing is Your</span>
+      <span class="pb-t3 pb-pale rv">Rain Walker Healing is Your</span>
 
-      <span class="pb-huge rv d1">Mind,</span>
-      <span class="pb-large rv d2">Body</span>
-      <span class="pb-and-spirit rv d3">&amp; Spirit</span>
+      <span class="pb-t1 pb-teal rv d1" style="font-style:italic; margin-top:0.3rem;"><em>Mind,</em></span>
+      <span class="pb-t2 pb-cream rv d2">Body</span>
+      <span class="pb-t2 pb-cream rv d2" style="font-style:italic; margin-top:0.2rem;"><em>&amp; Spirit</em></span>
 
-      <span class="pb-wellness rv d4">Wellness Practice</span>
+      <span class="pb-t3 pb-pale rv d3" style="margin-top:1rem;">Wellness Practice</span>
 
-      <div class="pb-divider rv d4"></div>
+      <div class="pb-divider rv d3"></div>
 
-      <p class="pb-offering rv d3">
-        offering hypnosis, massage,<br>sound and energy healing
+      <p class="pb-t3 pb-pale rv d3">
+        offering hypnosis, massage, sound and energy healing
       </p>
 
-      <span class="pb-bring rv d4">to bring forth</span>
-      <span class="pb-clarity rv d4">clarity, health, and peace.</span>
+      <span class="pb-t3 pb-pale rv d4" style="font-style:italic; margin-top:0.9rem;"><em>to bring forth</em></span>
+      <span class="pb-t1 pb-teal rv d4" style="font-style:italic;"><em>clarity, health, and peace.</em></span>
 
-      <p class="pb-second rv d3">
-        Whether you have a mental block, physical pain, or you just need to energize,
+      <p class="pb-t3 pb-pale rv d4" style="font-style:italic; max-width:52ch; margin: 1rem auto 0;">
+        <em>Whether you have a mental block, physical pain, or you just need to energize,
         you'll be in the best hands with a wide range of solutions to help you feeling
-        lighter, brighter and free.
+        lighter, brighter and free.</em>
       </p>
 
     </div>
