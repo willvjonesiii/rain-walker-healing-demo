@@ -1929,6 +1929,120 @@
       resize();
       draw();
     })();
+
+    /* CLOUD PARTING CANVAS */
+    (function() {
+      const canvas   = document.getElementById('cloudCanvas');
+      if (!canvas) return;
+      const ctx      = canvas.getContext('2d');
+      const heroText = document.querySelector('.hero-text');
+      if (!heroText) return;
+
+      let W, H;
+      const PART_R  = 140;
+      const mouse   = { x: -9999, y: -9999, over: false };
+      let clouds    = [];
+
+      function resize() {
+        W = canvas.width  = heroText.offsetWidth;
+        H = canvas.height = heroText.offsetHeight;
+        initClouds();
+      }
+
+      function makeCloud(ox, oy) {
+        const x  = ox !== undefined ? ox : Math.random() * W;
+        const y  = oy !== undefined ? oy : Math.random() * H;
+        const n  = 3 + Math.floor(Math.random() * 4);
+        const puffs = [];
+        for (let i = 0; i < n; i++) {
+          puffs.push({
+            dx: i === 0 ? 0 : (Math.random() - 0.5) * 70,
+            dy: (Math.random() - 0.5) * 22,
+            r:  16 + Math.random() * 34
+          });
+        }
+        return {
+          ox: x, oy: y,
+          x, y,
+          vx: 0, vy: 0,
+          puffs,
+          opacity: 0.07 + Math.random() * 0.12,
+          spd: 0.06 + Math.random() * 0.14
+        };
+      }
+
+      function initClouds() {
+        clouds = Array.from({ length: 16 }, () => makeCloud());
+      }
+
+      heroText.addEventListener('mousemove', e => {
+        const r  = canvas.getBoundingClientRect();
+        mouse.x  = e.clientX - r.left;
+        mouse.y  = e.clientY - r.top;
+        mouse.over = true;
+      });
+      heroText.addEventListener('mouseleave', () => { mouse.over = false; });
+
+      function update() {
+        clouds.forEach(c => {
+          c.ox += c.spd;
+          if (c.ox > W + 100) c.ox = -100;
+
+          if (mouse.over) {
+            const dx   = c.x - mouse.x;
+            const dy   = c.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+            if (dist < PART_R) {
+              const force = ((PART_R - dist) / PART_R) * 5;
+              c.vx += (dx / dist) * force;
+              c.vy += (dy / dist) * force;
+            }
+          }
+
+          c.vx += (c.ox - c.x) * 0.035;
+          c.vy += (c.oy - c.y) * 0.035;
+          c.vx *= 0.80;
+          c.vy *= 0.80;
+          c.x += c.vx;
+          c.y += c.vy;
+        });
+      }
+
+      function drawCloud(c) {
+        ctx.save();
+        ctx.globalAlpha = c.opacity;
+        ctx.fillStyle   = 'rgba(180, 220, 240, 1)';
+        c.puffs.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(c.x + p.dx, c.y + p.dy, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        ctx.restore();
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+
+        if (mouse.over) {
+          const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, PART_R);
+          g.addColorStop(0,   'rgba(48, 175, 163, 0.09)');
+          g.addColorStop(0.4, 'rgba(48, 175, 163, 0.04)');
+          g.addColorStop(1,   'rgba(48, 175, 163, 0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, PART_R, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        clouds.forEach(drawCloud);
+        update();
+        requestAnimationFrame(render);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      render();
+    })();
   </script>
 
 </body>
