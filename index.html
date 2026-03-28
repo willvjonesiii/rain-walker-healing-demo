@@ -753,8 +753,18 @@
 
     /* ─── BLOG ─────────────────────────────────────── */
     .blog {
-      background: var(--bg);
-      border-top: 1px solid rgba(48,175,163,0.1);
+      background: var(--bg-3);
+      border-top: 3px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--teal), transparent) 1;
+      position: relative;
+    }
+    .blog::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(78,205,196,0.4), transparent);
     }
     .blog-header {
       text-align: center;
