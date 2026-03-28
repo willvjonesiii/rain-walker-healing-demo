@@ -1948,10 +1948,13 @@
       const heroText = document.querySelector('.hero-text');
       if (!heroText) return;
 
+      const img = new Image();
+      img.src   = 'cloud_PNG8.png';
+
       let W, H;
-      const PART_R  = 140;
-      const mouse   = { x: -9999, y: -9999, over: false };
-      let clouds    = [];
+      const PART_R = 155;
+      const mouse  = { x: -9999, y: -9999, over: false };
+      let clouds   = [];
 
       function resize() {
         W = canvas.width  = heroText.offsetWidth;
@@ -1959,30 +1962,23 @@
         initClouds();
       }
 
-      function makeCloud(ox, oy) {
-        const x  = ox !== undefined ? ox : Math.random() * W;
-        const y  = oy !== undefined ? oy : Math.random() * H;
-        const n  = 3 + Math.floor(Math.random() * 4);
-        const puffs = [];
-        for (let i = 0; i < n; i++) {
-          puffs.push({
-            dx: i === 0 ? 0 : (Math.random() - 0.5) * 70,
-            dy: (Math.random() - 0.5) * 22,
-            r:  16 + Math.random() * 34
-          });
-        }
+      function makeCloud() {
+        const w = 210 + Math.random() * 260;
+        const h = w * 0.52;
+        const x = Math.random() * W;
+        const y = Math.random() * H;
         return {
           ox: x, oy: y,
-          x, y,
+          x,  y,
           vx: 0, vy: 0,
-          puffs,
-          opacity: 0.07 + Math.random() * 0.12,
-          spd: 0.06 + Math.random() * 0.14
+          w,  h,
+          opacity: 0.18 + Math.random() * 0.28,
+          spd: 0.04 + Math.random() * 0.11
         };
       }
 
       function initClouds() {
-        clouds = Array.from({ length: 16 }, () => makeCloud());
+        clouds = Array.from({ length: 11 }, makeCloud);
       }
 
       heroText.addEventListener('mousemove', e => {
@@ -1996,37 +1992,33 @@
       function update() {
         clouds.forEach(c => {
           c.ox += c.spd;
-          if (c.ox > W + 100) c.ox = -100;
+          if (c.ox > W + c.w) c.ox = -c.w;
 
           if (mouse.over) {
             const dx   = c.x - mouse.x;
             const dy   = c.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy) || 1;
             if (dist < PART_R) {
-              const force = ((PART_R - dist) / PART_R) * 5;
+              const force = ((PART_R - dist) / PART_R) * 6.5;
               c.vx += (dx / dist) * force;
               c.vy += (dy / dist) * force;
             }
           }
 
-          c.vx += (c.ox - c.x) * 0.035;
-          c.vy += (c.oy - c.y) * 0.035;
-          c.vx *= 0.80;
-          c.vy *= 0.80;
-          c.x += c.vx;
-          c.y += c.vy;
+          c.vx += (c.ox - c.x) * 0.03;
+          c.vy += (c.oy - c.y) * 0.03;
+          c.vx *= 0.82;
+          c.vy *= 0.82;
+          c.x  += c.vx;
+          c.y  += c.vy;
         });
       }
 
       function drawCloud(c) {
         ctx.save();
         ctx.globalAlpha = c.opacity;
-        ctx.fillStyle   = 'rgba(180, 220, 240, 1)';
-        c.puffs.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(c.x + p.dx, c.y + p.dy, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        });
+        ctx.globalCompositeOperation = 'screen';
+        ctx.drawImage(img, c.x - c.w / 2, c.y - c.h / 2, c.w, c.h);
         ctx.restore();
       }
 
@@ -2034,13 +2026,12 @@
         ctx.clearRect(0, 0, W, H);
 
         if (mouse.over) {
-          const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, PART_R);
-          g.addColorStop(0,   'rgba(48, 175, 163, 0.09)');
-          g.addColorStop(0.4, 'rgba(48, 175, 163, 0.04)');
-          g.addColorStop(1,   'rgba(48, 175, 163, 0)');
+          const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, PART_R * 0.65);
+          g.addColorStop(0, 'rgba(48, 175, 163, 0.08)');
+          g.addColorStop(1, 'rgba(48, 175, 163, 0)');
           ctx.fillStyle = g;
           ctx.beginPath();
-          ctx.arc(mouse.x, mouse.y, PART_R, 0, Math.PI * 2);
+          ctx.arc(mouse.x, mouse.y, PART_R * 0.65, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -2051,7 +2042,7 @@
 
       window.addEventListener('resize', resize);
       resize();
-      render();
+      img.complete ? render() : (img.onload = () => { resize(); render(); });
     })();
   </script>
 
